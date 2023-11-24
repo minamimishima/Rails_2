@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+
+.header-menu {
+  padding: 0 40px;
+}
+
+.header-menu-login {
+  display: flex;
+  align-items: center;
+}
+
+.user-image-container {
+  margin: 0 10px;
+}
+
+.user-image {
+  height: 40px;
+  width: auto;
+}

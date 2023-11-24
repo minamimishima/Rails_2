@@ -1,0 +1,10 @@
+<p>アイコン画像：</p>
+  <% if @user.image? %>
+    <%= image_tag @user.image.url, size: "60x60" %>
+  <% else %>
+    <%= image_tag "/default.png", size: "60x60" %>
+  <% end %>
+<p>名前：<%= @user.name %></p>
+<p>自己紹介：<%= @user.introduction %></p>
+
+<%= link_to "編集", profile_edit_path %>
