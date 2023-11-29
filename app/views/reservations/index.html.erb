@@ -1,0 +1,45 @@
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>画像</th>
+        <th>施設名</t>
+        <th>紹介文</th>
+        <th>合計料金</th>
+        <th>チェックイン</th>
+        <th>チェックアウト</th>
+        <th>宿泊日数</th>
+        <th>予約確定日時</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @reservations.each do |reservation| %>
+      <tr>
+        <td>
+          <% if reservation.room.room_image? %>
+            <%= image_tag reservation.room.room_image.url %>
+          <% else %>
+            <%= image_tag "/room_default.png" %>
+          <% end %>
+        </td>
+        <td><%= reservation.room.room_name %></td>
+        <td><%= reservation.room.room_detail %></td>
+        <td>
+          <% total_fee = reservation.room.fee * reservation.headcount * (reservation.checkout_date - reservation.checkin_date).to_i%>
+          <%= total_fee.to_s(:delimited) %>
+        </td>
+        <td><%= l reservation.checkin_date %></td>
+        <td><%= l reservation.checkout_date %></td>
+        <td><%= (reservation.checkout_date - reservation.checkin_date).to_i %>日</td>
+        <td><%= l reservation.created_at %></td>
+        <td><%= link_to "再予約", edit_reservation_path(reservation) %></td>
+        <td><%= link_to "キャンセル", reservation_path(reservation), method: :delete, data: { confirm: "本当にキャンセルしますか？"} %></td>
+      </tr>
+
+      <% end %>
+    </tbody>
+  </table>
+</div>

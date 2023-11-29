@@ -4,9 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  #validates :password, presence: true, on: :create
   validates :name, presence:true
   mount_uploader :image, ImageUploader
-  #attr_accessor :current_password
+  
+  has_many :rooms
+  has_many :reservations
 
 end

@@ -1,0 +1,20 @@
+<div class="container">
+
+  <%= render "shared/search" %>
+  <%= render "shared/search_by_area" %>
+
+  <% @rooms.each do |room| %>
+    <ul>
+      <% if room.room_image? %>
+        <li><%= image_tag room.room_image.url %></li>
+      <% else %>
+        <li><%= image_tag "/room_default.png" %></li>
+      <% end %>
+      <li><%= link_to room.room_name, room_path(room) %></li>
+      <li><%= room.address %></li>
+      <li><%= room.room_detail %></li>
+      <li>¥<%= room.fee.to_s(:delimited) %></li>
+    </ul>
+  <% end %>
+
+</div>

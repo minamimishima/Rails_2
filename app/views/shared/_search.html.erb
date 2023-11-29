@@ -1,0 +1,7 @@
+<div class="mb-3">
+  <%= form_with url: search_path, method: :get do |f| %>
+    <%= f.label :word, "ワード" %>
+    <%= f.text_field :word, class:"form-control" %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>

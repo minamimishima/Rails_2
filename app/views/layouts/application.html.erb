@@ -20,16 +20,20 @@
             <div class="user-image-container">
               <% if user_signed_in? %>
                 <% if @user.image? %>
-                  <%= image_tag @user.image.url, class:"user-image" %>
+                  <%= image_tag @user.image.url, class:"user-image-header" %>
                 <% else %>
-                  <%= image_tag "/default.png", class:"user-image" %>
+                  <%= image_tag "/profile_default.png", class:"user-image-header" %>
                 <% end %>
             </div>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <%= @user.name %>
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><%= link_to "施設の新規登録", new_room_path, class:"dropdown-item" %></li>
+                <li><%= link_to "予約一覧", reservations_path, class:"dropdown-item" %></li>
+                <hr>
+                <li><%= link_to "登録済み一覧", rooms_own_path, class:"dropdown-item" %></li>
                 <li><%= link_to "アカウント設定", account_path, class:"dropdown-item" %></li>
                 <hr>
                 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"dropdown-item" %></li>
@@ -46,10 +50,11 @@
       </div>
     </nav>
 
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+    
     <%= yield %>
 
 

@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   end
 
   def profile_update
-    binding.pry
     @user = current_user
     if @user.update(profile_params)
       redirect_to profile_path

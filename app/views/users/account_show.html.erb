@@ -1,7 +1,10 @@
-<p>アカウント</p>
-<p>メールアドレス：<%= @user.email %></p>
-<p>パスワード：*********</p>
+<div class="container">
 
-<%= link_to "編集", edit_user_registration_path %>
+  <p>アカウント</p>
+  <p>メールアドレス：<%= @user.email %></p>
+  <p>パスワード：*********</p>
 
-<%= link_to "プロフィール", profile_path %>
+  <p><%= link_to "編集", edit_user_registration_path %></p>
+  <p><%= link_to "プロフィール", profile_path %></p>
+
+</div>

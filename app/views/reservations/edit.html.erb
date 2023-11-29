@@ -1,0 +1,19 @@
+<div class="container">
+
+  <%= render "/shared/error", obj: @reservation %>
+
+  <%= form_with model: @reservation do |f| %>
+  <%= f.label :checkin_date, "チェックイン日" %>
+  <%= f.date_field :checkin_date %>
+
+  <%= f.label :checkout_date, "チェックアウト日" %>
+  <%= f.date_field :checkout_date %>
+
+  <%= f.label :headcount, "人数" %>
+  <%= f.number_field :headcount %>
+
+  <%= f.submit "予約" %>
+
+<% end %>
+
+</div>
