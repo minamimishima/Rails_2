@@ -6,7 +6,7 @@ class Room < ApplicationRecord
 
   mount_uploader :room_image, ImageUploader
   belongs_to :user
-  has_many :reservations
+  has_many :reservations, dependent: :destroy
 
 def self.search(word)
   Room.where("room_name LIKE ?", "%" + word + "%").or(Room.where("room_detail LIKE ?", "%" + word + "%"))

@@ -1,15 +1,15 @@
 <div class="container">
   <h2>予約内容の確認</h2>
 
-    <p>チェックイン <%= @reservation.checkin_date %></p>
-    <p>チェックアウト <%= @reservation.checkout_date %></p>
-    <p>日数
+    <p>チェックイン：<%= l @reservation.checkin_date %></p>
+    <p>チェックアウト：<%= l @reservation.checkout_date %></p>
+    <p>日数：
       <% days = (@reservation.checkout_date - @reservation.checkin_date).to_i %>
-      <%= days.to_i %>
+      <%= days.to_i %>泊
     </p>
-    <p>人数
+    <p>人数：
       <% headcount = @reservation.headcount %>
-      <%= headcount %>
+      <%= headcount %>人
     </p>
     <p>お支払い金額 ¥<%= (days * headcount * @reservation.room.fee).to_s(:delimited) %></p>
 
@@ -21,6 +21,9 @@
       <%= f.hidden_field :room_id, value: @room.id %>
       <%= f.submit "確定する" %>
     <% end %>
+    
+    <br><br>
+    <p><%= link_to "戻る", :back %></p>
 
 </div>
 

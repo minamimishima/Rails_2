@@ -15,7 +15,7 @@
   <body>
     <nav class="navbar bg-primary header-menu">
       <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">宿泊予約</span>
+        <span class="navbar-brand mb-0 h1"><%= link_to "宿泊予約", root_path, class:"title" %></span>
           <div class ="header-menu-login">
             <div class="user-image-container">
               <% if user_signed_in? %>

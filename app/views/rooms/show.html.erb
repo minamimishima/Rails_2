@@ -6,27 +6,41 @@
       <li><%= image_tag "/room_default.png" %></li>
   <% end %>
 
-    <li>施設名：<%= @room.room_name %></li>
+    <li>
+      施設名：<%= @room.room_name %>
+      <% if user_signed_in? && @user.id == @room.user_id %>
+        <%= link_to "編集", edit_room_path(@room) %>
+        <%= link_to "削除", room_path(@room), method: :delete, data:{confirm: "本当に削除しますか？"} %>
+      <% end %>
+    </li>
     <li>住所：<%= @room.address %></li>
     <li>紹介文：<%= @room.room_detail %></li>
     <li>宿泊料金：¥<%= @room.fee.to_s(:delimited) %></li>
   </ul>
 
-  <%= render "/shared/error", obj: @reservation %>
-  <%= form_with(model: @reservation, url: confirm_reservations_path) do |f| %>
-    <%= f.label :checkin_date, "チェックイン日" %>
-    <%= f.date_field :checkin_date %>
+  <% if user_signed_in? %>
 
-    <%= f.label :checkout_date, "チェックアウト日" %>
-    <%= f.date_field :checkout_date %>
+    <%= render "/shared/error", obj: @reservation %>
+    <%= form_with(model: @reservation, url: confirm_reservations_path) do |f| %>
+      <%= f.label :checkin_date, "チェックイン日" %>
+      <%= f.date_field :checkin_date %>
 
-    <%= f.label :headcount, "人数" %>
-    <%= f.number_field :headcount %>
+      <%= f.label :checkout_date, "チェックアウト日" %>
+      <%= f.date_field :checkout_date %>
 
-    <%= f.hidden_field :user_id, value: @user.id %>
-    <%= f.hidden_field :room_id, value: @room.id %>
+      <%= f.label :headcount, "人数" %>
+      <%= f.number_field :headcount %>
 
-    <%= f.submit "予約" %>
+      <%= f.hidden_field :user_id, value: @user.id %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+
+      <%= f.submit "予約" %>
+
+    <% end %>
+
+  <% else %>
+
+    <p><%= link_to "ログイン", new_user_session_path %></p>
 
   <% end %>
 

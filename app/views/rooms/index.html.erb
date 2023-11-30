@@ -3,18 +3,9 @@
   <%= render "shared/search" %>
   <%= render "shared/search_by_area" %>
 
-  <% @rooms.each do |room| %>
-    <ul>
-      <% if room.room_image? %>
-        <li><%= image_tag room.room_image.url %></li>
-      <% else %>
-        <li><%= image_tag "/room_default.png" %></li>
-      <% end %>
-      <li><%= link_to room.room_name, room_path(room) %></li>
-      <li><%= room.address %></li>
-      <li><%= room.room_detail %></li>
-      <li>¥<%= room.fee.to_s(:delimited) %></li>
-    </ul>
-  <% end %>
 
+  <%= link_to "東京", search_by_area_path(area: "東京都") %>
+  <%= link_to "大阪", search_by_area_path(area: "大阪") %>
+  <%= link_to "京都", search_by_area_path(area: "京都府") %>
+  <%= link_to "札幌", search_by_area_path(area: "札幌") %>
 </div>

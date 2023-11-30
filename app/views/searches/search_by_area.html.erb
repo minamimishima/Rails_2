@@ -11,7 +11,7 @@
       <li><%= link_to result.room_name, room_path(result) %></li>
       <li><%= result.address %></li>
       <li><%= result.room_detail %></li>
-      <li><%= result.fee %></li>
+      <li>¥<%= result.fee.to_s(:delimited) %></li>
     </ul>
   <% end %>
 </div>

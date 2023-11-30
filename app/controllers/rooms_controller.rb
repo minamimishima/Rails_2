@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_action :get_current_user
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
     @rooms = Room.all
@@ -39,14 +40,19 @@ class RoomsController < ApplicationController
   def destroy
     @room = Room.find(params[:id])
     if @room.destroy
-      redirect_to rooms_path
+      redirect_to rooms_own_path
     else
-      render "show"
+      render "own"
     end
   end
 
   def own
-    @rooms = @user.rooms
+    if user_signed_in?
+      @rooms = @user.rooms
+    else
+      flash[:notice] = "ログインしてください"
+      redirect_to root_path
+    end
   end
 
   private
@@ -56,6 +62,14 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:room_name, :address, :fee, :room_detail, :room_image, :user_id)
+  end
+
+  def ensure_correct_user
+    @room = Room.find(params[:id])
+    if @room.user_id != @user.id
+      flash[:notice] = "権限がありません"
+      redirect_to room_path(@room.id)
+    end
   end
 
 end

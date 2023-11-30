@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :get_current_user
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
     @reservations = @user.reservations
@@ -29,11 +30,11 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    
   end
 
   def edit
     @reservation = Reservation.find(params[:id])
+    @room = Room.find(@reservation.room.id)
   end
 
   def update
@@ -63,4 +64,12 @@ class ReservationsController < ApplicationController
     params.require(:reservation).permit(:checkin_date, :checkout_date, :headcount, :user_id, :room_id)
   end
 
+  def ensure_correct_user
+    @reservation = Reservation.find(params[:id])
+    if @reservation.user_id != @user.id
+      flash[:notice] = "権限がありません"
+      redirect_to reservations_path
+    end
+  end
+  
 end

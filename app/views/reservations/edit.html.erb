@@ -1,5 +1,22 @@
 <div class="container">
 
+  <ul>
+    <% if @room.room_image? %>
+      <li><%= image_tag @room.room_image.url %></li>
+    <% else %>
+      <li><%= image_tag "/room_default.png" %></li>
+  <% end %>
+
+    <li>施設名：<%= @room.room_name %></li>
+      <% if @room.user_id == @user.id %>
+        <%= link_to "編集", edit_room_path(@room) %>
+        <%= link_to "削除", room_path(@room), method: :delete, data:{confirm:"本当に削除しますか？"} %>
+      <% end %>
+    <li>住所：<%= @room.address %></li>
+    <li>紹介文：<%= @room.room_detail %></li>
+    <li>宿泊料金：¥<%= @room.fee.to_s(:delimited) %></li>
+  </ul>
+
   <%= render "/shared/error", obj: @reservation %>
 
   <%= form_with model: @reservation do |f| %>

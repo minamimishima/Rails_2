@@ -29,7 +29,7 @@
         <td><%= reservation.room.room_detail %></td>
         <td>
           <% total_fee = reservation.room.fee * reservation.headcount * (reservation.checkout_date - reservation.checkin_date).to_i%>
-          <%= total_fee.to_s(:delimited) %>
+          ¥<%= total_fee.to_s(:delimited) %>
         </td>
         <td><%= l reservation.checkin_date %></td>
         <td><%= l reservation.checkout_date %></td>
