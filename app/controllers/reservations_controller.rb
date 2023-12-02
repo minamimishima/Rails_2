@@ -13,7 +13,11 @@ class ReservationsController < ApplicationController
 
   def confirm
     @reservation = Reservation.new(reservation_params)
-    @room = Room.find(@reservation.room_id)
+    @room = Room.find_by(id: @reservation.room_id)
+    if @reservation.checkin_date.present? && @reservation.checkout_date.present?
+      @days = (@reservation.checkout_date - @reservation.checkin_date).to_i
+      @total_fee = @room.fee * @days * @reservation.headcount
+    end
     if @reservation.invalid?
       render "rooms/show"
     end
@@ -21,7 +25,7 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
-    @room = Room.find(@reservation.room_id)
+    @room = Room.find_by(id: @reservation.room_id)
     if @reservation.save
       redirect_to reservations_path
     else
@@ -33,12 +37,13 @@ class ReservationsController < ApplicationController
   end
 
   def edit
-    @reservation = Reservation.find(params[:id])
-    @room = Room.find(@reservation.room.id)
+    @reservation = Reservation.find_by(id: params[:id])
+    @room = Room.find_by(id: @reservation.room.id)
   end
 
   def update
-    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find_by(id: params[:id])
+    @room = Room.find_by(id: @reservation.room.id)
     if @reservation.update(reservation_params)
       redirect_to reservations_path
     else
@@ -47,7 +52,7 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
-    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find_by(id: params[:id])
     if @reservation.destroy
       redirect_to reservations_path
     else
@@ -65,10 +70,14 @@ class ReservationsController < ApplicationController
   end
 
   def ensure_correct_user
-    @reservation = Reservation.find(params[:id])
-    if @reservation.user_id != @user.id
-      flash[:notice] = "権限がありません"
-      redirect_to reservations_path
+    @reservation = Reservation.find_by(id: params[:id])
+    if @reservation.nil?
+      redirect_to root_path
+    else
+      unless @reservation.user_id == @user.id
+        flash[:notice] = "権限がありません"
+        redirect_to reservations_path
+      end
     end
   end
   

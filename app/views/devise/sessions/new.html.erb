@@ -1,16 +1,16 @@
-<div class="container">
+<div class="container w-25">
   
   <h2>ログイン</h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"w-100" %>
     </div>
 
     <div class="field">
       <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
+      <%= f.password_field :password, autocomplete: "current-password", class:"w-100" %>
     </div>
 
     <% if devise_mapping.rememberable? %>
@@ -19,9 +19,9 @@
         <%= f.label :remember_me %>
       </div>
     <% end %>
-
+    <br>
     <div class="actions">
-      <%= f.submit "ログイン" %>
+      <%= f.submit "ログイン", class:"btn btn-warning" %>
     </div>
   <% end %>
 

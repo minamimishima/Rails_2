@@ -1,28 +1,29 @@
-<div class="container">
-  <table>
+<div class="container w-75">
+  <h2>予約一覧</h2>
+  <table class="table">
     <thead>
       <tr>
-        <th>画像</th>
-        <th>施設名</t>
-        <th>紹介文</th>
-        <th>合計料金</th>
-        <th>チェックイン</th>
-        <th>チェックアウト</th>
-        <th>宿泊日数</th>
-        <th>予約確定日時</th>
-        <th></th>
-        <th></th>
+        <th scope="col" style="width: 10%">画像</th>
+        <th scope="col" style="width: 10%">施設名</t>
+        <th scope="col" style="width: 30%">紹介文</th>
+        <th scope="col" style="width: 10%">合計料金</th>
+        <th scope="col" style="width: 10%">チェックイン</th>
+        <th scope="col" style="width: 10%">チェックアウト</th>
+        <th scope="col" style="width: 10%">宿泊日数</th>
+        <th scope="col" style="width: 10%">予約確定日時</th>
+        <th scope="col" style="width: 5%"></th>
+        <th scope="col" style="width: 5%"></th>
       </tr>
     </thead>
 
-    <tbody>
+    <tbody class="table-group-divider">
       <% @reservations.each do |reservation| %>
       <tr>
         <td>
           <% if reservation.room.room_image? %>
-            <%= image_tag reservation.room.room_image.url %>
+            <%= image_tag reservation.room.room_image.url, class:"table-room-image" %>
           <% else %>
-            <%= image_tag "/room_default.png" %>
+            <%= image_tag "room_default.png", class:"table-room-image" %>
           <% end %>
         </td>
         <td><%= reservation.room.room_name %></td>
@@ -35,8 +36,8 @@
         <td><%= l reservation.checkout_date %></td>
         <td><%= (reservation.checkout_date - reservation.checkin_date).to_i %>日</td>
         <td><%= l reservation.created_at %></td>
-        <td><%= link_to "再予約", edit_reservation_path(reservation) %></td>
-        <td><%= link_to "キャンセル", reservation_path(reservation), method: :delete, data: { confirm: "本当にキャンセルしますか？"} %></td>
+        <td><%= link_to "再予約", edit_reservation_path(reservation), class:"text-secondary" %></td>
+        <td><%= link_to "キャンセル", reservation_path(reservation), method: :delete, data: { confirm: "本当にキャンセルしますか？"}, class:"text-secondary" %></td>
       </tr>
 
       <% end %>

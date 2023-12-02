@@ -1,17 +1,28 @@
-<div class="container">
+<div class="container w-25">
   <h2>予約内容の確認</h2>
+  <table class="table table-borderless mt-3">
+    <tr>
+      <td scope="col" style="width: 50%">チェックイン</td>
+      <td scope="col" style="width: 50%"<%= l @reservation.checkin_date %></td>
+    </tr>
+    <tr>
+      <td>チェックアウト</td>
+      <td><%= l @reservation.checkout_date %></td>
+    </tr>
+    <tr>
+      <td>日数</td>
+      <td><%= @days %>泊</td>
+    </tr>
+    <tr>
+      <td>人数</td>
+      <td><%= @reservation.headcount %>人</td>
+    </tr>
+    <tr>
+      <td>お支払い金額</td>
+      <td>¥<%= @total_fee.to_s(:delimited) %></td>
+    </tr>
+  </table>
 
-    <p>チェックイン：<%= l @reservation.checkin_date %></p>
-    <p>チェックアウト：<%= l @reservation.checkout_date %></p>
-    <p>日数：
-      <% days = (@reservation.checkout_date - @reservation.checkin_date).to_i %>
-      <%= days.to_i %>泊
-    </p>
-    <p>人数：
-      <% headcount = @reservation.headcount %>
-      <%= headcount %>人
-    </p>
-    <p>お支払い金額 ¥<%= (days * headcount * @reservation.room.fee).to_s(:delimited) %></p>
 
     <%= form_with model:@reservation do |f| %>
       <%= f.hidden_field :checkin_date, value: @reservation.checkin_date %>
@@ -19,11 +30,10 @@
       <%= f.hidden_field :headcount, value: @reservation.headcount %>
       <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.hidden_field :room_id, value: @room.id %>
-      <%= f.submit "確定する" %>
+      <%= f.submit "確定する", class:"btn btn-warning mt-3 mb-3" %>
     <% end %>
-    
-    <br><br>
-    <p><%= link_to "戻る", :back %></p>
+
+    <p><%= link_to "戻る", :back, class:"text-secondary" %></p>
 
 </div>
 

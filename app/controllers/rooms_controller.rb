@@ -20,16 +20,22 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
+    @room = Room.find_by(id:params[:id])
     @reservation = Reservation.new
+    if @room == nil
+      redirect_to root_path
+    end
   end
 
   def edit
-    @room = Room.find(params[:id])
+    @room = Room.find_by(id: params[:id])
+    if @room == nil
+      redirect_to root_path
+    end
   end
 
   def update
-    @room = Room.find(params[:id])
+    @room = Room.find_by(id: params[:id])
     if @room.update(room_params)
       redirect_to room_path(@room)
     else
@@ -38,7 +44,7 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room = Room.find(params[:id])
+    @room = Room.find_by(id: params[:id])
     if @room.destroy
       redirect_to rooms_own_path
     else
@@ -65,8 +71,10 @@ class RoomsController < ApplicationController
   end
 
   def ensure_correct_user
-    @room = Room.find(params[:id])
-    if @room.user_id != @user.id
+    @room = Room.find_by(id: params[:id])
+    if @room == nil
+      redirect_to root_path
+    elsif @room.user_id != @user.id
       flash[:notice] = "権限がありません"
       redirect_to room_path(@room.id)
     end

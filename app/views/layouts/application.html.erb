@@ -13,16 +13,16 @@
   </head>
 
   <body>
-    <nav class="navbar bg-primary header-menu">
+    <nav class="navbar header-menu p-3">
       <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1"><%= link_to "宿泊予約", root_path, class:"title" %></span>
-          <div class ="header-menu-login">
-            <div class="user-image-container">
+        <span class="navbar-brand mb-0 h1"><%= link_to "Potepan Share", root_path, class:"title" %></span>
+          <div class ="header-menu-login d-flex align-items-center">
+            <div class="user-image-container p-2">
               <% if user_signed_in? %>
                 <% if @user.image? %>
                   <%= image_tag @user.image.url, class:"user-image-header" %>
                 <% else %>
-                  <%= image_tag "/profile_default.png", class:"user-image-header" %>
+                  <%= image_tag "profile_default.png", class:"user-image-header" %>
                 <% end %>
             </div>
             <div class="dropdown">
@@ -50,9 +50,9 @@
       </div>
     </nav>
 
-    <div class="container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <div class="container w-25">
+      <p class="notice w-100"><%= notice %></p>
+      <p class="alert w-100"><%= alert %></p>
     </div>
     
     <%= yield %>
