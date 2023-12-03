@@ -1,15 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   
-  def index
-  end
-
-  def new
-  end
-
-  def create
-  end
-
   def account_show
     @user = current_user
   end
@@ -29,9 +20,6 @@ class UsersController < ApplicationController
     else
       render "profile_edit"
     end
-  end
-
-  def destroy
   end
 
 private

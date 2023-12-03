@@ -33,9 +33,6 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def edit
     @reservation = Reservation.find_by(id: params[:id])
     @room = Room.find_by(id: @reservation.room.id)
