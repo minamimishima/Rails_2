@@ -14,7 +14,7 @@ class ReservationsController < ApplicationController
   def confirm
     @reservation = Reservation.new(reservation_params)
     @room = Room.find_by(id: @reservation.room_id)
-    if @reservation.checkin_date.present? && @reservation.checkout_date.present?
+    unless @reservation.checkin_date.blank? || @reservation.checkout_date.blank? || @reservation.headcount.blank?
       @days = (@reservation.checkout_date - @reservation.checkin_date).to_i
       @total_fee = @room.fee * @days * @reservation.headcount
     end
