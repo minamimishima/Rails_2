@@ -15,7 +15,7 @@ class Reservation < ApplicationRecord
   end
 
   def checkout_date_cannot_be_before_checkin_date
-    if checkout_date.present? && checkin_date.present? && checkout_date < checkin_date
+    if checkout_date.present? && checkin_date.present? && checkout_date <= checkin_date
       errors.add(:checkout_date, "はチェックイン日より後に設定してください")
     end
   end
