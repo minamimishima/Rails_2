@@ -9,7 +9,6 @@
         <th scope="col" style="width: 10%">合計料金</th>
         <th scope="col" style="width: 10%">チェックイン</th>
         <th scope="col" style="width: 10%">チェックアウト</th>
-        <th scope="col" style="width: 10%">宿泊日数</th>
         <th scope="col" style="width: 10%">予約確定日時</th>
         <th scope="col" style="width: 5%"></th>
         <th scope="col" style="width: 5%"></th>
@@ -34,7 +33,6 @@
         </td>
         <td><%= l reservation.checkin_date %></td>
         <td><%= l reservation.checkout_date %></td>
-        <td><%= (reservation.checkout_date - reservation.checkin_date).to_i %>日</td>
         <td><%= l reservation.created_at %></td>
         <td><%= link_to "再予約", edit_reservation_path(reservation), class:"text-secondary" %></td>
         <td><%= link_to "キャンセル", reservation_path(reservation), method: :delete, data: { confirm: "本当にキャンセルしますか？"}, class:"text-secondary" %></td>

@@ -72,11 +72,13 @@ class RoomsController < ApplicationController
 
   def ensure_correct_user
     @room = Room.find_by(id: params[:id])
-    if @room == nil
+    if @room.nil? || @user.nil?
       redirect_to root_path
-    elsif @room.user_id != @user.id
+    elsif
+      unless @room.user_id == @user.id
       flash[:notice] = "権限がありません"
       redirect_to room_path(@room.id)
+      end
     end
   end
 

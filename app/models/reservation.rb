@@ -2,7 +2,7 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :room
 
-  validates :headcount, numericality: { greater_than_or_equal_to: 1}
+  validates :headcount, presence: true, numericality: { greater_than_or_equal_to: 1}
   validates :checkin_date, presence: true
   validates :checkout_date, presence: true
   validate :checkin_date_cannot_be_before_today

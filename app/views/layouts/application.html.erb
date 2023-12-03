@@ -31,13 +31,11 @@
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><%= link_to "施設の新規登録", new_room_path, class:"dropdown-item" %></li>
+                <li><%= link_to "登録済み一覧", rooms_own_path, class:"dropdown-item" %></li>
                 <li><%= link_to "予約一覧", reservations_path, class:"dropdown-item" %></li>
                 <hr>
-                <li><%= link_to "登録済み一覧", rooms_own_path, class:"dropdown-item" %></li>
                 <li><%= link_to "アカウント設定", account_path, class:"dropdown-item" %></li>
-                <hr>
                 <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"dropdown-item" %></li>
-                <li><%= link_to "トップ", root_path, class:"dropdown-item" %></li>
               </ul>
             </div>
             <% else %>

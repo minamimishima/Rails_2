@@ -71,7 +71,7 @@ class ReservationsController < ApplicationController
 
   def ensure_correct_user
     @reservation = Reservation.find_by(id: params[:id])
-    if @reservation.nil?
+    if @reservation.nil? || @user.nil?
       redirect_to root_path
     else
       unless @reservation.user_id == @user.id
