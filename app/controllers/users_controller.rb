@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :configure_permitted_parameters, if: :devise_controller?
   
   def index
   end
@@ -36,9 +35,6 @@ class UsersController < ApplicationController
   end
 
 private
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:profile_update, keys: [:name, :image, :introduction])
-  end
 
   def profile_params
     params.require(:user).permit(:name, :image, :introduction)

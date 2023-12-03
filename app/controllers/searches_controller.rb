@@ -12,6 +12,7 @@ class SearchesController < ApplicationController
   end
 
   private
+  
   def get_current_user
     @user = current_user
   end
