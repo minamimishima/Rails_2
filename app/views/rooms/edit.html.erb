@@ -1,0 +1,38 @@
+<div class="container w-25">
+
+  <%= render "/shared/error", obj: @room %>
+
+<h2>編集</h2>
+  <%= form_with model: @room do |f| %>
+    <table>
+      <tr>
+        <th><%= f.label :room_name,"施設名" %></th>
+        <td><%= f.text_field :room_name, class:"w-100" %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :address,"住所" %></th>
+        <td><%= f.text_field :address, class:"w-100" %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :fee,"料金" %></th>
+        <td><%= f.number_field :fee, class:"w-100" %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :room_detail,"詳細" %></th>
+        <td><%= f.text_area :room_detail, class:"w-100" %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :room_image,"画像" %></th>
+        <td><%= f.file_field :room_image %></td>
+      </tr>
+    </table>
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <br>
+    <%= f.submit "登録", class:"btn btn-warning" %>
+  <% end %>
+
+</div>

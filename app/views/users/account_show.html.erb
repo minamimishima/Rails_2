@@ -1,0 +1,24 @@
+<div class="container w-25">
+
+  <div class="d-flex justify-content-between align-items-center">
+    <h2>アカウント</h2>
+    <%= link_to "編集", edit_user_registration_path, class:"text-secondary" %>
+  </div>
+  <hr>
+
+  <table class="table table-borderless">
+    <tr>
+      <td>メールアドレス</td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td>パスワード</td>
+      <td>*********</td>
+    </tr>
+    <tr>
+      <td><%= link_to "プロフィール", profile_path, class:"text-secondary" %></td>
+      <td></td>
+    </tr>
+  </table>
+
+</div>

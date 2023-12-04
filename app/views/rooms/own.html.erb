@@ -1,0 +1,35 @@
+<div class="container w-75">
+  <h2>登録済み一覧</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" style="width: 10%">画像</th>
+        <th scope="col" style="width: 15%">施設名</th>
+        <th scope="col" style="width: 40%">紹介文</th>
+        <th scope="col" style="width: 10%">料金</th>
+        <th scope="col" style="width: 15%">作成日</th>
+        <th scope="col" style="width: 5%">編集</th>
+        <th scope="col" style="width: 5%">削除</th>
+      </tr>
+    </thead>
+
+    <tbody class="table-group-divider">
+    <% @rooms.each do |room| %>
+      <tr>
+        <td>
+          <% if room.room_image? %>
+            <%= image_tag room.room_image.url, class:"table-room-image" %>
+          <% else %>
+            <%= image_tag "room_default.png", class:"table-room-image" %>
+        <% end %></td>
+        <td><%= link_to room.room_name, room_path(room), class:"text-secondary" %></td>
+        <td><%= room.room_detail %></td>
+        <td>¥<%= room.fee.to_s(:delimited) %></td>
+        <td><%= l room.created_at, format: :short %></td>
+        <td><%= link_to "編集", edit_room_path(room), class:"text-secondary" %></td>
+        <td><%= link_to "削除", room_path(room), method: :delete, data: { confirm: "本当に削除しますか？" }, class:"text-secondary" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

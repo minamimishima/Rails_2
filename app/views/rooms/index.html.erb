@@ -1,0 +1,28 @@
+<div class="firstview-container w-100">
+
+  <div class="container firstview">
+
+    <div class="firstview-text-container">
+      <span class="firstview-text">Potepan Shareで</span>
+      <br>
+      <span class="firstview-text">まだ体験したことのない</span>
+      <br>
+      <span class="firstview-text">旅をしよう</span>
+    </div>
+
+    <div class="search-container">
+      <%= render "shared/search_by_area" %>
+    </div>
+
+  </div>
+
+  <div class="recommend-container">
+    <h2>おすすめエリア</h2>
+    <%= link_to "東京", search_by_area_path(area: "東京都"), class:"btn btn-secondary recommend-area" %>
+    <%= link_to "大阪", search_by_area_path(area: "大阪"), class:"btn btn-secondary recommend-area" %>
+    <%= link_to "京都", search_by_area_path(area: "京都府"), class:"btn btn-secondary recommend-area" %>
+    <%= link_to "札幌", search_by_area_path(area: "札幌"), class:"btn btn-secondary recommend-area" %>
+
+  </div>
+
+</div>

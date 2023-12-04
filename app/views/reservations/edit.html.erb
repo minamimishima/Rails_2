@@ -1,0 +1,54 @@
+<div class="container room-show-container w-50">
+
+  <% if @room.room_image? %>
+    <%= image_tag @room.room_image.url %></li>
+  <% else %>
+    <%= image_tag "room_default.png" %></li>
+  <% end %>
+
+  <div class="room-information-container mt-3">
+    <div class="d-flex align-items-center">
+      <h2><%= @room.room_name %></h2>
+      <% if user_signed_in? && @user.id == @room.user_id %>
+        <%= link_to "編集", edit_room_path(@room), class:"text-secondary" %>
+        <%= link_to "削除", room_path(@room), method: :delete, data:{confirm: "本当に削除しますか？"}, class:"text-secondary" %>
+      <% end %>
+    </div>
+    <hr>
+    <%= @room.address %><br>
+    <%= @room.room_detail %><br>
+    ¥<%= @room.fee.to_s(:delimited) %>〜<br>
+
+  </div>
+
+    <% if user_signed_in? %>
+      <%= render "/shared/error", obj: @reservation %>
+
+      <div class="reservation-container mt-4 mb-3 pt-4 pb-4 px-3">
+        <%= form_with(model: @reservation, url: reservation_path) do |f| %>
+          <%= f.label :checkin_date, "チェックイン日" %>
+          <%= f.date_field :checkin_date %>
+
+          <%= f.label :checkout_date, "チェックアウト日" %>
+          <%= f.date_field :checkout_date %>
+
+          <%= f.label :headcount, "人数" %>
+          <%= f.number_field :headcount %>
+
+          <%= f.hidden_field :user_id, value: @user.id %>
+          <%= f.hidden_field :room_id, value: @room.id %>
+
+          <%= f.submit "予約" %>
+
+        <% end %>
+      </div>
+
+    <% else %>
+      <p><%= link_to "ログイン", new_user_session_path, class:"btn btn-warning mt-4 mb-4" %></p>
+    <% end %>
+
+    <%= link_to "戻る", :back, class:"text-secondary" %>
+
+</div>
+
+

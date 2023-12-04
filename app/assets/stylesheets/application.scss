@@ -1,0 +1,117 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.header-menu {
+  background-color: #223670;
+}
+
+.user-image-header {
+  height: 40px;
+  width: auto;
+}
+
+.user-image-profile {
+  height: 60px;
+  width: auto;
+}
+
+.title {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.table-room-image {
+  width: 100px;
+  height: auto;
+}
+
+body {
+  position: relative;
+}
+
+.firstview-container {
+  position: absolute;
+  margin: 0;
+  background-image: url(background.jpeg);
+  background-size: cover;
+  background-position: 0px 0px;
+  top: 88px;
+  height: 1000px;
+}
+
+.firstview {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.firstview-text-container {
+  margin-bottom: 30px;
+}
+
+.firstview-text {
+  font-size: 50px;
+  font-weight: 700;
+}
+
+.search-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 30px 5px;
+  border-radius: 10px;
+  width: 350px;
+}
+
+.search {
+  display: inline-block;
+}
+
+.recommend-container {
+  margin: auto;
+  text-align: center;
+}
+
+.room-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.room-list {
+  width: 600px;
+  margin-bottom: 10px;
+}
+
+.room-image-size {
+  width: 500px;
+  height: auto;
+}
+
+.room-show-container {
+  margin: auto;
+}
+
+.reservation-container {
+  background-color: rgba(208, 169, 0, 0.5);
+  border-radius: 10px;
+  width: fit-content;
+}

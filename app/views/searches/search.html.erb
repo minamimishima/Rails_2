@@ -1,0 +1,19 @@
+<div class="container w-50 room-list-container">
+  <%= render "shared/search" %>
+  
+  <p>検索結果：<%= @results.count %>件</p>
+
+  <% @results.each do |result| %>
+    <ul class="room-list list-group">
+      <% if result.room_image? %>
+        <li class="list-group-item"><%= image_tag result.room_image.url, class:"room-image-size" %></li>
+      <% else %>
+        <li class="list-group-item"><%= image_tag "room_default.png", class:"room-image-size" %></li>
+      <% end %>
+      <li class="list-group-item"><%= link_to result.room_name, room_path(result), class:"text-secondary" %></li>
+      <li class="list-group-item"><%= result.address %></li>
+      <li class="list-group-item"><%= result.room_detail %></li>
+      <li class="list-group-item">¥<%= result.fee.to_s(:delimited) %></li>
+    </ul>
+  <% end %>
+</div>
