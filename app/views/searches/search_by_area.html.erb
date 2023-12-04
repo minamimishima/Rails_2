@@ -1,4 +1,6 @@
 <div class="container w-50 room-list-container">
+  <%= render "shared/search" %>
+
   <p>検索結果：<%= @results.count %>件</p>
   
   <% @results.each do |result| %>

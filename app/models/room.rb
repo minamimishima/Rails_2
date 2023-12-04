@@ -9,8 +9,16 @@ class Room < ApplicationRecord
 
   mount_uploader :room_image, ImageUploader
 
-def self.search(word)
-  Room.where("room_name LIKE ?", "%" + word + "%").or(Room.where("room_detail LIKE ?", "%" + word + "%"))
+def self.search(area, word)
+  if word.present? && area.present?
+    Room.where("address LIKE ?" , "%" + area + "%").merge(Room.where("room_name LIKE ?", "%" + word + "%").or(Room.where("room_detail LIKE ?", "%" + word + "%")))
+  elsif area.present?
+    Room.where("address LIKE ?", "%" + area + "%")
+  elsif word.present?
+    Room.where("room_name LIKE ?", "%" + word + "%").or(Room.where("room_detail LIKE ?", "%" + word + "%"))
+  else
+    Room.all
+  end
 end
 
 def self.search_by_area(area)

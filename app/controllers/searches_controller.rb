@@ -2,8 +2,9 @@ class SearchesController < ApplicationController
   before_action :get_current_user
 
   def search
+    @area = params[:area]
     @word = params[:word]
-    @results = Room.search(@word)
+    @results = Room.search(@area, @word)
   end
 
   def search_by_area
